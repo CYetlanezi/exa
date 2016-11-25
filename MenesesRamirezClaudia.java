@@ -1,15 +1,27 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package menesesramirezclaudia;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ *
+ * @author hca
+ */
 public class MenesesRamirezClaudia {
-    
+   
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) throws FileNotFoundException {
-        
-        Pixel vectorpi[][] = new Pixel[3][3];
-        int ro [][] = new int[9][3];
+        // TODO code application logic here
+        Pixel vectorpi[] = new Pixel[9];
+        int ro [] = new int[9];
         File datos =new File("Pixe.txt");
         Scanner leer;
         try{
@@ -19,64 +31,65 @@ public class MenesesRamirezClaudia {
             leer =null;
         }
         if(leer != null){
-            int r =0,v=0,b=0,c=0,h=0;
+            int r =0,v=0,b=0,c=0;
             while(leer.hasNextInt()){
-                for(int l = 0; l <3; l++){
-                    for(int i = 0; i <3; i++){
-                            for(int k = 0; k <3; k++){
-                                switch(c%3){
-                                    case 0:
-                                        r = leer.nextInt();
-                                        c++;
-                                        break;
-                                    case 1:
-                                        v = leer.nextInt();
-                                        c++;
-                                        break;
-                                    case 2:
-                                        b = leer.nextInt();
-                                        c++;
-                                        break;
-                                }
-                            }
-                            vectorpi[l][i] = new Pixel(r,v,b,l,i);
-                            System.out.println(vectorpi[l][i].toString());
-                            ro[h][0] =   vectorpi[l][i].getRojo();
-                            ro[h][1] = l;
-                            ro[h][2] = i;
-                            h++;
+                for(int i = 0; i <9; i++){
+                        for(int k = 0; k <3; k++){
+                        switch(c%3){
+                            case 0:
+                                r = leer.nextInt();
+                                c++;
+                                break;
+                            case 1:
+                                v = leer.nextInt();
+                                c++;
+                                break;
+                            case 2:
+                                b = leer.nextInt();
+                                c++;
+                                break;
                         }
+                        
+                        }
+                        vectorpi[i] = new Pixel(r,v,b,i);
+                        System.out.println(vectorpi[i].toString());
+                        ro[i] =   vectorpi[i].getRojo();
+                    }
                 }
             }
         leer.close();
-        int ind [][] = new int[9][3];
+        int ind [] = new int[9];
+   
         ind = Ordenar(ro);
+        //Miss, A la posición le sume 1 para que no empezara en 0 como tal
         for(int i = 0; i <9; i++){
-                System.out.println(vectorpi[ind[i][1]][ind[i][2]].getRojo()+" fila : "+ind[i][1]+" columna : "+ind[i][2]);
-        }
-        }
+                System.out.println(vectorpi[ind[i]].getRojo()+" fila : "+vectorpi[ind[i]].getFila());
+         }
+   
     }
-    
-    public static int [][] Ordenar(int [][] rojo){
-      int ind [][] = new int[9][3];
-      int roj [][]=  new int[9][3];
+    public static int [] Ordenar(int [] rojo){
+      int ind [] = new int[9];
+      int roj []=  new int[9];
       roj = rojo;
       for(int i = 0; i <9; i++){
-              ind[i][0] = Mayor(roj);
-              ind[i][1]= roj[ind[i][0]][1];
-              ind[i][2]= roj[ind[i][0]][2];
-              roj[ind[i][0]][0] = 0;
+              ind[i] = Mayor(roj);
+              roj[ind[i]] = 0;
+              
        }
+      
       return ind;     
     }
-    public static int  Mayor(int [][] rojo){
+    public static int Mayor(int [] rojo){
        int mayor=0,indmayor = 0;
-       for(int j = 0; j < 9; j++){
-            if(rojo[j][0] > mayor){
-                mayor = rojo[j][0];
+       for(int j = 0; j < rojo.length; j++){
+            if(rojo[j] > mayor){
+                mayor = rojo[j];
                 indmayor = j;
+                
             }
        }
        return indmayor;
     }
+    
+    
 }

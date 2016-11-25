@@ -14,14 +14,12 @@ public class Pixel {
     private int verde;
     private int azul;
      private int fi;
-     private int co;
       
-    public Pixel(int r, int v, int b,int co,int fi){
+    public Pixel(int r, int v, int b,int fi){
         this.rojo = r;
         this.verde = v;
         this.azul = b;
         this.fi = fi;
-        this.co = co;
     }
     public void setRojo(int re){
         this.rojo = re;
@@ -31,9 +29,6 @@ public class Pixel {
     }
     public int getFila(){
         return fi+1;
-    }
-    public int getColumna(){
-        return co+1;
     }
     public String toString(){
         return ""+rojo+" "+verde+" "+azul+"\n";
